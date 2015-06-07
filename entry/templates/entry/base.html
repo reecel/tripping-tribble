@@ -6,10 +6,12 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/entry.css' %}">
         <link href="http://fonts.googleapis.com/css?family=Bree Serif&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Bree Serif&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        
     </head>
        <body>
     <div class="page-header">
+        <a href="{% url "entry.views.post_new" %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+
         <h1><a href="/">Virtual Critique</a></h1>
     </div>
     <div class="content container">
