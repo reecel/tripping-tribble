@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CritiqueForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
@@ -59,4 +59,17 @@ def post_remove(request, pk):
     post.delete()
     return redirect('entry.views.post_list')
 
+@login_required
+def add_critique_to_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CritiqueForm(request.POST)
+        if form.is_valid():
+            critique = form.save(commit=False)
+            critique.post = post
+            critique.save()
+            return redirect('entry.views.post_detail', pk=post.pk)
+    else:
+        form = CritiqueForm()
+    return render(request, 'entry/add_critique_to_post.html', {'form': form})
 

@@ -9,9 +9,25 @@
             <a class="btn btn-default" href="{% url 'entry.views.post_publish' pk=post.pk %}">Publish</a>
            </div>
        {% endif %}
+       {% if user.is_authenticated %}
        <a class="btn btn-default" href="{% url "post_edit" pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
        <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+       {% else %}
+       <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+       {% endif %}
        <h1>{{ post.title }}</h1>
        <p>{{ post.text|linebreaks }}</p>
    </div>
+        <hr>
+       <a class="btn btn-default" href="{% url 'add_critique_to_post' pk=post.pk %}">Add your thoughts</a>
+       {% for critique in post.comments.all %}
+       {% if user.is_authenticated %} 
+        <div class="critique">
+        <div class="date">{{ critique.create_date }}</div>
+        <strong>{{ critique.author }}</strong>
+        <p>{{ critique.text|linebreaks }}</p>
+    </div>
+       {% empty %}
+    <p>Anxiously awaiting your thoughts.</p>
+       {% endfor %}
 {% endblock %}
