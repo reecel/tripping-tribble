@@ -7,8 +7,9 @@
                {{ post.publish_date }}
        {% else %}
             <a class="btn btn-default" href="{% url 'entry.views.post_publish' pk=post.pk %}">Publish</a>
-           </div>
-       {% endif %}
+          {% endif %} 
+          </div>
+       
        {% if user.is_authenticated %}
        <a class="btn btn-default" href="{% url "post_edit" pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
        <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
@@ -20,10 +21,9 @@
    </div>
         <hr>
        <a class="btn btn-default" href="{% url 'add_critique_to_post' pk=post.pk %}">Add your thoughts</a>
-       {% for critique in post.comments.all %}
-       {% if user.is_authenticated %} 
+       {% for critique in post.comments.all %} 
         <div class="critique">
-        <div class="date">{{ critique.create_date }}</div>
+        <div class="date">{{ critique.create_date }}&nbsp;&nbsp;&nbsp;&nbsp;</div>
         <strong>{{ critique.author }}</strong>
         <p>{{ critique.text|linebreaks }}</p>
     </div>

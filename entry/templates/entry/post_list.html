@@ -6,6 +6,9 @@
             <div class="date">
                 {{ post.publish_date }}
             </div>
+            <div class="author">
+                Posted by:  <str>{{ post.author }}</str>
+            </div>
             <h1><a href="{% url "entry.views.post_detail" pk=post.pk %}">{{ post.title }}</a></h1>
             <p>{{ post.text|linebreaks }}</p>
             <a href="{% url 'entry.views.post_detail' pk=post.pk %}">Critiques: {{ post.comments.count }}</a>
